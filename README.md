@@ -4,6 +4,11 @@
 
 目前版本採用 OpenStreetMap + 台北市停車資料 + 自訂收費結構檔，提供地圖瀏覽、車種切換、空位篩選、收費顏色標示、搜尋與定位功能。
 
+## 畫面截圖
+
+![App Screenshot 1](Image/Screenshot_20260608_193051.jpg)
+![App Screenshot 2](Image/Screenshot_20260608_193101.jpg)
+
 ## 功能總覽
 
 - 地圖顯示台北市停車場點位（OSMDroid / MAPNIK）。
