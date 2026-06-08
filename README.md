@@ -35,7 +35,7 @@ App 主要資料檔：
 
 - 描述資料: https://tcgbusfs.blob.core.windows.net/blobtcmsv/TCMSV_alldesc.json
 - 即時可用格位: https://tcgbusfs.blob.core.windows.net/blobtcmsv/TCMSV_allavailable.json
-- 收費結構: https://raw.githubusercontent.com/YENCHUN-L/ParkAPI/refs/heads/main/payex_structured.json
+- 收費結構: https://github.com/YENCHUN-L/Parking_App/blob/main/Output/payex_structured.json
 
 更新節流：
 
@@ -172,8 +172,22 @@ unsigned bundle 位置：
 - App 主邏輯: app/src/main/java/com/example/parkingapp/MainActivity.kt
 - Android 設定: app/src/main/AndroidManifest.xml
 - App module 設定: app/build.gradle.kts
-- 收費資料（產出）: Output/payex_structured.json
+- 收費資料（唯一來源）: Output/payex_structured.json
 - 說明文件: APK_FEATURES.md
+
+## payex_structured.json 產生腳本路徑
+
+目前腳本預設輸出路徑：
+
+- Output/payex_structured.json
+
+APK 打包時會由 Gradle 在 preBuild 自動把 Output/payex_structured.json 複製到 build 目錄的 generated assets，避免在 repo 保留重複檔案。
+
+可用腳本：
+
+- scripts/payex_to_json.py
+- scripts/rebuild_payex_structured_with_llm.py
+- scripts/run_rebuild_payex_structured_with_llm.ps1
 
 ## 已知事項
 

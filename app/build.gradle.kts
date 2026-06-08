@@ -3,6 +3,19 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
+val generatedPayexAssetsDir = layout.buildDirectory.dir("generated/assets/payex")
+
+val syncPayexAsset by tasks.registering(Copy::class) {
+    val sourceFile = rootProject.file("Output/payex_structured.json")
+    from(sourceFile)
+    into(generatedPayexAssetsDir)
+    doFirst {
+        if (!sourceFile.exists()) {
+            throw GradleException("Missing required file: Output/payex_structured.json")
+        }
+    }
+}
+
 androidComponents {
     beforeVariants(selector().withBuildType("release")) { variantBuilder ->
         variantBuilder.enable = false
@@ -12,6 +25,12 @@ androidComponents {
 android {
     namespace = "com.example.parkingapp"
     compileSdk = 34
+
+    sourceSets {
+        getByName("main") {
+            assets.srcDir(generatedPayexAssetsDir)
+        }
+    }
 
     defaultConfig {
         applicationId = "com.example.parkingapp"
@@ -29,6 +48,10 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+}
+
+tasks.named("preBuild") {
+    dependsOn(syncPayexAsset)
 }
 
 dependencies {

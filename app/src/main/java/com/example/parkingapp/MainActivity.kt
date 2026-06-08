@@ -159,7 +159,7 @@ class MainActivity : AppCompatActivity() {
 
     private val remoteDescUrl = "https://tcgbusfs.blob.core.windows.net/blobtcmsv/TCMSV_alldesc.json"
     private val remoteAvailUrl = "https://tcgbusfs.blob.core.windows.net/blobtcmsv/TCMSV_allavailable.json"
-    private val remotePayexUrl = "https://raw.githubusercontent.com/YENCHUN-L/ParkAPI/refs/heads/main/payex_structured.json"
+    private val remotePayexUrl = "https://github.com/YENCHUN-L/Parking_App/blob/main/Output/payex_structured.json"
     private val remoteUpdateIntervalMs = 15 * 60 * 1000L
     private val prefsName = "parking_app_prefs"
     private val keyLastRemoteUpdateMs = "last_remote_update_ms"
@@ -938,7 +938,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun downloadPayexStructuredFromGithub() {
         downloadToInternalFile(
-            remotePayexUrl,
+            toRawGithubContentUrl(remotePayexUrl),
             "payex_structured.json",
             validateJson = true,
             requiredTopLevelKey = "items"
@@ -1002,6 +1002,14 @@ class MainActivity : AppCompatActivity() {
     private fun isLikelyJson(content: String): Boolean {
         val trimmed = content.trimStart()
         return trimmed.startsWith("{") || trimmed.startsWith("[")
+    }
+
+    private fun toRawGithubContentUrl(url: String): String {
+        val blobMarker = "/blob/"
+        if (!url.contains("github.com") || !url.contains(blobMarker)) return url
+
+        val hostAdjusted = url.replace("https://github.com/", "https://raw.githubusercontent.com/")
+        return hostAdjusted.replace(blobMarker, "/")
     }
 
     private fun isInTaiwan(lat: Double, lon: Double): Boolean =
