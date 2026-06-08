@@ -1,0 +1,30 @@
+# Local environment secrets
+.env
+.env.*
+!.env.example
+
+# Android/Gradle generated outputs
+.gradle/
+build/
+**/build/
+
+# Local Android SDK path
+local.properties
+
+# Android Studio/IntelliJ
+.idea/
+*.iml
+
+# Python virtual environment/cache
+.venv/
+__pycache__/
+*.pyc
+
+# Android signing secrets
+key.properties
+*.jks
+*.keystore
+
+# Local Gradle distributions (large; keep out of git)
+tools/gradle-*-bin.zip
+tools/gradle-*/
